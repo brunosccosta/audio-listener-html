@@ -1,13 +1,18 @@
 jQuery(document).ready(function(){
     var audio = document.getElementsByTagName("audio")[0];
 
-    jQuery(document).bind('keydown', 'ctrl+p', function(event){
+    jQuery("#text").bind('keydown', 'ctrl+p', function(event){
         audio.play();
         event.preventDefault();
     });
 
-    jQuery(document).bind('keydown', 'ctrl+o', function(event){
+    jQuery("#text").bind('keydown', 'ctrl+o', function(event){
         audio.pause();
+        event.preventDefault();
+    });
+
+    jQuery("#text").bind('keydown', 'ctrl+l', function(event){
+        audio.currentTime -= 5;
         event.preventDefault();
     });
 
