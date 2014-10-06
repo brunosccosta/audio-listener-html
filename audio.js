@@ -20,16 +20,38 @@ jQuery(document).ready(function(){
     holder.ondragover = function () { this.className = 'hover'; return false; };
     holder.ondragend = function () { this.className = ''; return false; };
     holder.ondrop = function (e) {
-      this.className = '';
       e.preventDefault();
+      
+      this.className = '';
+      this.innerHTML = 'Loading...';
 
-      var file = e.dataTransfer.files[0],
+      var text = '',
+	  file = e.dataTransfer.files[0],
           reader = new FileReader();
+      
+      text += file.name;
+
       reader.onload = function (event) {
-        audio.src = event.target.result
+        audio.src = event.target.result;
       };
       reader.readAsDataURL(file);
+
+      this.innerHTML = text;      
 
       return false;
     };
 });
+
+function setDuration() {
+    var audio = document.getElementsByTagName("audio")[0];
+    var holder = document.getElementById('holder');
+
+    var s, m;
+    s = Math.floor( audio.duration % 60 );
+    m = Math.floor( audio.duration / 60 ) % 60;
+    
+    s = s < 10 ? "0"+s : s;
+    m = m < 10 ? "0"+m : m;
+    
+    holder.innerHTML += ' - ' + m+":"+s;
+}
