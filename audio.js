@@ -1,4 +1,14 @@
 jQuery(document).ready(function(){
+    var localStorageKey = 'texto';
+
+    if (localStorage.getItem(localStorageKey)) {
+        $("#text").val(localStorage.getItem(localStorageKey));
+    }
+
+    $("#text").keyup(function() {
+        localStorage.setItem(localStorageKey, $("#text").val());
+    });
+
     var audio = document.getElementsByTagName("audio")[0];
 
     jQuery("#text").bind('keydown', 'ctrl+p', function(event){
