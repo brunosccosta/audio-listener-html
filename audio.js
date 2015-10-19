@@ -25,6 +25,16 @@ jQuery(document).ready(function(){
         audio.currentTime -= 5;
         event.preventDefault();
     });
+    
+    jQuery("#text").bind('keydown', 'ctrl+m', function(event){
+        audio.playbackRate += 0.1
+        event.preventDefault();
+    });
+    
+    jQuery("#text").bind('keydown', 'ctrl+n', function(event){
+        audio.playbackRate -= 0.1
+        event.preventDefault();
+    });
 
     var holder = document.getElementById('holder');
     holder.ondragover = function () { this.className = 'hover'; return false; };
