@@ -36,14 +36,29 @@ jQuery(document).ready(function(){
         event.preventDefault();
     });
 
-    var holder = document.getElementById('holder');
-    holder.ondragover = function () { this.className = 'hover'; return false; };
-    holder.ondragend = function () { this.className = ''; return false; };
+    var holder = document.getElementById('text');
+    holder.ondragover = function(){
+        jQuery(this).addClass('hover');
+        return false;
+    };
+
+    holder.ondragleave = function(){
+        debugger;
+    };
+
+    holder.ondragend = function(){
+        jQuery(this).removeClass('hover');
+        return false;
+    };
+
     holder.ondrop = function (e) {
       e.preventDefault();
+      $("#info-alert").alert();
+      $("#info-alert").fadeTo(2000, 500).slideUp(500, function(){
+          $("#info-alert").alert('close');
+      });   
       
       this.className = '';
-      this.innerHTML = 'Loading...';
 
       var text = '',
 	  file = e.dataTransfer.files[0],
@@ -53,6 +68,10 @@ jQuery(document).ready(function(){
 
       reader.onload = function (event) {
         audio.src = event.target.result;
+        $("#success-alert").alert();
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+            $("#success-alert").alert('close');
+        });   
       };
       reader.readAsDataURL(file);
 
@@ -64,7 +83,7 @@ jQuery(document).ready(function(){
 
 function setDuration() {
     var audio = document.getElementsByTagName("audio")[0];
-    var holder = document.getElementById('holder');
+    var info = document.getElementById('info');
 
     var s, m;
     s = Math.floor( audio.duration % 60 );
@@ -73,5 +92,5 @@ function setDuration() {
     s = s < 10 ? "0"+s : s;
     m = m < 10 ? "0"+m : m;
     
-    holder.innerHTML += ' - ' + m+":"+s;
+    info.innerHTML += ' - ' + m+":"+s;
 }

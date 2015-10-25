@@ -1,17 +1,32 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt">
 <head>
-    <meta charset=utf-8>
+    <meta charset=utf-8></meta>
     <title>Dito Transcrito</title>
-    <link rel="stylesheet" href="audio.css" />
-    <script type="text/javascript" src="jquery-1.4.2.js"></script>
-    <script type="text/javascript" src="jquery.hotkeys.js"></script>
-    <script type="text/javascript" src="audio.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/audio.css" />
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.hotkeys.js"></script>
+    <script src="js/audio.js"></script>
 </head>
 <body>
-    <textarea id="text"></textarea>
+    <div class="alert alert-info" id="loading-alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Carregando.. </strong>
+    </div>
+    <div class="alert alert-success" id="success-alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Carregado com sucesso</strong>
+    </div>
+    <textarea id="text">Arraste o arquivo de áudio para cá.</textarea>
     <audio id="audio" src="" controls onloadedmetadata="setDuration()"></audio>
-    <div id="holder">
-        <span>Arraste o arquivo de áudio para cá!</span>
+    <div id="info">
+        <span></span>
     </div>
     <div style="clear: both;" />
     <div id="controls">

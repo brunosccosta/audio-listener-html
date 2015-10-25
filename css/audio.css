@@ -3,18 +3,17 @@
     margin: 3px;
 }
 
-#holder {
+#info {
     float: right;
     width: 76%;
     height: 30px;
-    border: 4px dashed #ccc;
     margin: 3px;
 }
 
-#holder.hover { border: 4px dashed #333; }
+#text.hover { border: 4px dashed #333; }
 
 #text {
-    margin: auto;
+    overflow: auto;
     font-family: Arial, Helvetica, Tahoma, Verdana;
     font-size: 16px;
     width: 100%;
