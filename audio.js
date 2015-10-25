@@ -31,7 +31,7 @@ jQuery(document).ready(function(){
         event.preventDefault();
     });
     
-    jQuery("#text").bind('keydown', 'ctrl+n', function(event){
+    jQuery("#text").bind('keydown', 'ctrl+g', function(event){
         audio.playbackRate -= 0.1
         event.preventDefault();
     });
