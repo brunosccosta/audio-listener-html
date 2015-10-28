@@ -3,7 +3,9 @@ jQuery(document).ready(function(){
 
     if (localStorage.getItem(localStorageKey)) {
         $("#text").val(localStorage.getItem(localStorageKey));
-    }
+    } else {
+		$("#text").val("Arraste o arquivo de áudio aqui");
+	}
 
     $("#text").keyup(function() {
         localStorage.setItem(localStorageKey, $("#text").val());
@@ -37,46 +39,30 @@ jQuery(document).ready(function(){
     });
 
     var holder = document.getElementById('text');
-    holder.ondragover = function(){
-        jQuery(this).addClass('hover');
-        return false;
-    };
-
-    holder.ondragleave = function(){
-        debugger;
-    };
-
-    holder.ondragend = function(){
-        jQuery(this).removeClass('hover');
-        return false;
-    };
-
     holder.ondrop = function (e) {
       e.preventDefault();
-      $("#info-alert").alert();
-      $("#info-alert").fadeTo(2000, 500).slideUp(500, function(){
-          $("#info-alert").alert('close');
-      });   
-      
-      this.className = '';
-
-      var text = '',
-	  file = e.dataTransfer.files[0],
+	  
+	  $(this).removeClass('hover');
+	  $(this).addClass('hasAudio');
+	  
+      file = e.dataTransfer.files[0],
           reader = new FileReader();
       
-      text += file.name;
+	  $("#info").text(file.name);
 
       reader.onload = function (event) {
         audio.src = event.target.result;
-        $("#success-alert").alert();
-        $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
-            $("#success-alert").alert('close');
-        });   
+		$("#spinner").hide();  
       };
-      reader.readAsDataURL(file);
+	  
+	  $("#spinner").show();
+      reader.readAsDataURL(file);   
 
-      this.innerHTML = text;      
-
+	  if (!localStorage.getItem(localStorageKey))
+	  {
+		$(this).val('');
+	  }
+	  
       return false;
     };
 });
